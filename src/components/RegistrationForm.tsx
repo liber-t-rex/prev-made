@@ -17,6 +17,23 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ type = 'eu' 
 
     setStatus('loading');
     setTimeout(() => {
+      // Save to localStorage so they are persisted in browser memory
+      try {
+        const storedStr = localStorage.getItem('made_registered_emails') || '[]';
+        const list = JSON.parse(storedStr);
+        // Only add if it doesn't already exist in the list to avoid duplicate records
+        if (!list.some((item: any) => item.email === email && item.domain === type)) {
+          list.push({
+            email,
+            domain: type,
+            registeredAt: new Date().toISOString()
+          });
+          localStorage.setItem('made_registered_emails', JSON.stringify(list));
+        }
+      } catch (err) {
+        console.error('LocalStorage persist error:', err);
+      }
+
       setStatus('success');
       setEmail('');
       setTimeout(() => setStatus('idle'), 4000);
