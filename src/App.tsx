@@ -37,6 +37,12 @@ const DOMAINS: Record<Domain, DomainConfig> = {
   },
 };
 
+const GLOW_COLORS: Record<Domain, string> = {
+  paris: 'rgba(56, 189, 248, 0.95)',
+  fr: 'rgba(34, 211, 238, 0.95)',
+  eu: 'rgba(192, 132, 252, 0.95)',
+};
+
 export default function App() {
   const [activeDomain, setActiveDomain] = useState<Domain>('paris');
 
@@ -51,57 +57,78 @@ export default function App() {
 
   const inactiveDomains = getInactiveDomains();
 
-  // Premium Typography Logo Component for top header and navigation
-  const BrandLogo = ({ domain, size = 'large' }: { domain: Domain; size?: 'large' | 'small' }) => {
-    const sizeClasses = size === 'large' 
-      ? 'text-3xl md:text-5xl lg:text-6xl font-black' 
-      : 'text-[10px] md:text-sm font-bold';
-      
-    const dotSizeClasses = size === 'large'
-      ? 'w-2.5 h-2.5 md:w-4 md:h-4 lg:w-4.5 lg:h-4.5'
-      : 'w-0.5 h-0.5 md:w-1.5 md:h-1.5';
-      
-    const dotSpacingClasses = size === 'large'
-      ? 'mx-1 mb-1.5 md:mb-2'
-      : 'mx-[2px] mb-[1px] md:mb-[2px]';
+  // Premium Graphic Geometric Brand Logo from uploaded reference images without background, with dynamic side neon reflexions
+  const BrandLogo = ({ 
+    domain, 
+    size = 'large', 
+    position = 'top' 
+  }: { 
+    domain: Domain; 
+    size?: 'large' | 'small'; 
+    position?: 'top' | 'left' | 'right' 
+  }) => {
+    const containerSize = size === 'large' 
+      ? 'w-24 h-24 md:w-32 md:h-32' 
+      : 'w-7 h-7 md:w-10 md:h-10';
 
-    const renderDotSymbol = () => {
-      if (domain === 'eu') {
-        // Gold square
-        return (
-          <span 
-            className={`${dotSizeClasses} ${dotSpacingClasses} bg-[#FFCC00] rounded-[1px] shrink-0`} 
-            style={{ 
-              boxShadow: size === 'large' ? '0 0 10px rgba(255, 204, 0, 0.5)' : 'none' 
-            }}
-          />
-        );
-      }
-      if (domain === 'fr') {
-        // Tricolour bar
-        return (
-          <span className={`inline-flex ${dotSizeClasses} ${dotSpacingClasses} shrink-0 rounded-[1px] overflow-hidden`}>
-            <span className="w-1/3 h-full bg-[#002395]" />
-            <span className="w-1/3 h-full bg-[#FFFFFF]" />
-            <span className="w-1/3 h-full bg-[#ED2939]" />
-          </span>
-         );
-      }
-      // 'paris' => Bicolour bar (Blue & Red)
-      return (
-        <span className={`inline-flex ${dotSizeClasses} ${dotSpacingClasses} shrink-0 rounded-[1px] overflow-hidden`}>
-          <span className="w-1/2 h-full bg-[#002395]" />
-          <span className="w-1/2 h-full bg-[#ED2939]" />
-        </span>
-      );
-    };
+    const glowColor = GLOW_COLORS[domain];
+
+    // Determine drop shadow filters to simulate realistic glow reflecting from the nearest neon side
+    let filterStyle = '';
+    if (position === 'left') {
+      filterStyle = `drop-shadow(-4px 0px 8px ${glowColor}) drop-shadow(-1px 0px 2px ${glowColor})`;
+    } else if (position === 'right') {
+      filterStyle = `drop-shadow(4px 0px 8px ${glowColor}) drop-shadow(1px 0px 2px ${glowColor})`;
+    } else {
+      filterStyle = `drop-shadow(0px 10px 18px ${glowColor}) drop-shadow(0px 2px 4px ${glowColor})`;
+    }
 
     return (
-      <span className={`inline-flex items-end font-sans tracking-tighter text-neutral-100 select-none ${sizeClasses}`}>
-        <span className="lowercase">made</span>
-        {renderDotSymbol()}
-        <span className="lowercase">{domain}</span>
-      </span>
+      <div 
+        className={`relative ${containerSize} flex items-center justify-center overflow-visible shrink-0 transition-all duration-300`}
+        style={{ filter: filterStyle }}
+      >
+        <svg viewBox="0 0 100 100" className="w-[88%] h-[88%] overflow-visible">
+          {domain === 'paris' && (
+            <>
+              {/* Image 3: Core Blue Archway with Black Inside Tower and Red Column Accent on Black Background */}
+              <path
+                d="M 10,10 L 90,10 L 90,90 L 72,90 L 72,58 L 60,58 L 60,20 L 40,20 L 40,58 L 28,58 L 28,90 L 10,90 Z"
+                fill="#013a81"
+              />
+              <rect x="46" y="25" width="8" height="18" fill="#e51c24" />
+            </>
+          )}
+          {domain === 'fr' && (
+            <>
+              {/* Image 2: France Blue and Red Pillars with White Bridge Connector on Black Background */}
+              <path
+                d="M 10,10 L 38,10 L 38,50 L 24,50 L 24,90 L 10,90 Z"
+                fill="#013a81"
+              />
+              <path
+                d="M 62,10 L 90,10 L 90,90 L 76,90 L 76,50 L 62,50 Z"
+                fill="#e51c24"
+              />
+              <rect x="38" y="24" width="24" height="14" fill="#ffffff" />
+            </>
+          )}
+          {domain === 'eu' && (
+            <>
+              {/* Image 1: Europe Blue Left and Right Pillars with Gold Bridge Connector on Black Background */}
+              <path
+                d="M 10,10 L 38,10 L 38,50 L 24,50 L 24,90 L 10,90 Z"
+                fill="#013a81"
+              />
+              <path
+                d="M 62,10 L 90,10 L 90,90 L 76,90 L 76,50 L 62,50 Z"
+                fill="#013a81"
+              />
+              <rect x="38" y="24" width="24" height="14" fill="#ffa100" />
+            </>
+          )}
+        </svg>
+      </div>
     );
   };
 
@@ -135,9 +162,9 @@ export default function App() {
       </div>
 
       {/* HEADER SECTION (Top) */}
-      <header className="relative w-full flex justify-end items-start z-10">
-        {/* Top Right: Page Main Big Domain Display using the typography requested logos */}
-        <div className="text-right">
+      <header className="relative w-full flex justify-center items-start z-10">
+        {/* Centered Page Main Graphic Logo */}
+        <div className="text-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeDomain}
@@ -145,9 +172,9 @@ export default function App() {
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               exit={{ opacity: 0, y: 10, filter: 'blur(10px)' }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col"
+              className="flex flex-col items-center"
             >
-              <BrandLogo domain={activeDomain} size="large" />
+              <BrandLogo domain={activeDomain} size="large" position="top" />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -155,7 +182,7 @@ export default function App() {
 
       {/* CENTER COMPONENT (Main active artifact) */}
       <section className="relative flex-1 w-full flex flex-col md:flex-row items-center justify-center z-10 py-4">
-        {/* Central Displayed Glowing Artifact */}
+        {/* Central Displayed Glowing Artifact wrapped in a link to its domain */}
         <div className="relative flex flex-col items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
@@ -164,18 +191,26 @@ export default function App() {
               animate={{ scale: 1, opacity: 1, rotate: 0 }}
               exit={{ scale: 0.9, opacity: 0, rotate: 6 }}
               transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              className="relative cursor-pointer transition-transform duration-500 hover:scale-[1.03]"
+              className="relative transition-transform duration-500 hover:scale-[1.03]"
             >
-              {/* Outer light glow halo right behind shape */}
-              <div 
-                className="absolute inset-0 rounded-full blur-[72px] opacity-40 transition-all duration-1000"
-                style={{
-                  background: activeConfig.glowIntensity,
-                }}
-              />
-              
-              {/* SVG Neon Shape */}
-              <Artifact type={activeDomain} size="large" />
+              <a
+                href={activeDomain === 'paris' ? 'https://made.paris' : activeDomain === 'fr' ? 'https://made.fr' : 'https://made.eu'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative block cursor-pointer focus:outline-none"
+                title={`Go to made.${activeDomain}`}
+              >
+                {/* Outer light glow halo right behind shape */}
+                <div 
+                  className="absolute inset-0 rounded-full blur-[72px] opacity-40 transition-all duration-1000"
+                  style={{
+                    background: activeConfig.glowIntensity,
+                  }}
+                />
+                
+                {/* SVG Neon Shape */}
+                <Artifact type={activeDomain} size="large" />
+              </a>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -193,8 +228,8 @@ export default function App() {
               <Artifact type={inactiveDomains[0]} size="small" animate={false} />
             </div>
             
-            <div className="hidden sm:flex flex-col pt-1">
-              <BrandLogo domain={inactiveDomains[0]} size="small" />
+            <div className="flex flex-col">
+              <BrandLogo domain={inactiveDomains[0]} size="small" position="left" />
             </div>
           </button>
         </div>
@@ -236,8 +271,8 @@ export default function App() {
               <Artifact type={inactiveDomains[1]} size="small" animate={false} />
             </div>
             
-            <div className="hidden sm:flex flex-col pt-1">
-              <BrandLogo domain={inactiveDomains[1]} size="small" />
+            <div className="flex flex-col">
+              <BrandLogo domain={inactiveDomains[1]} size="small" position="right" />
             </div>
           </button>
         </div>

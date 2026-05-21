@@ -150,6 +150,18 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ type = 'eu' 
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="mt-2.5">
+        <a 
+          href="https://tally.so/r/ob6ByN"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`flex items-center justify-center gap-1.5 w-full py-1.5 px-3 border border-dashed rounded-lg font-mono font-bold tracking-widest uppercase transition-all duration-300 hover:bg-neutral-900/40 text-[10px] ${activeTheme.border} ${activeTheme.text}`}
+        >
+          <span>Register via Tally</span>
+          <ArrowRight className="w-3 h-3" />
+        </a>
+      </div>
     </div>
   );
 };
