@@ -44,7 +44,15 @@ const GLOW_COLORS: Record<Domain, string> = {
 };
 
 export default function App() {
-  const [activeDomain, setActiveDomain] = useState<Domain>('paris');
+  const [activeDomain, setActiveDomain] = useState<Domain>(() => {
+    if (typeof window !== 'undefined' && window.location && window.location.hostname) {
+      const hostname = window.location.hostname.toLowerCase();
+      if (hostname.includes('made.paris')) return 'paris';
+      if (hostname.includes('made.fr')) return 'fr';
+      if (hostname.includes('made.eu')) return 'eu';
+    }
+    return 'paris';
+  });
 
   const activeConfig = DOMAINS[activeDomain];
 
