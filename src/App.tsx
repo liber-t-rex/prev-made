@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Domain, DomainConfig } from './types';
 import { Artifact } from './components/Artifact';
@@ -56,6 +56,11 @@ export default function App() {
 
   const activeConfig = DOMAINS[activeDomain];
 
+  // Dynamically update browser tab title
+  useEffect(() => {
+    document.title = activeConfig.domainName.toLowerCase();
+  }, [activeDomain, activeConfig]);
+
   // Helper to obtain the two inactive domains for the navigation at the bottom
   const getInactiveDomains = (): Domain[] => {
     if (activeDomain === 'paris') return ['fr', 'eu'];
@@ -76,8 +81,8 @@ export default function App() {
     position?: 'top' | 'left' | 'right' 
   }) => {
     const containerSize = size === 'large' 
-      ? 'w-24 h-24 md:w-32 md:h-32' 
-      : 'w-7 h-7 md:w-10 md:h-10';
+      ? 'w-16 h-16 md:w-20 md:h-20' 
+      : 'w-3 h-3 md:w-3.5 md:h-3.5';
 
     const glowColor = GLOW_COLORS[domain];
 
@@ -242,27 +247,18 @@ export default function App() {
           </button>
         </div>
 
-        {/* Unified Mobile and Desktop Registration Form with Active Neon Mini Artifact pointing above it */}
+        {/* Unified Mobile and Desktop Registration Form closer to the bottom */}
         <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-20 flex flex-col items-center registration-container">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeDomain}
-              initial={{ opacity: 0, y: 25, scale: 0.95 }}
+              initial={{ opacity: 0, y: 15, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 25, scale: 0.95 }}
+              exit={{ opacity: 0, y: 15, scale: 0.95 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col items-center gap-1.5 text-center"
+              className="flex flex-col items-center text-center"
             >
-              {/* Dynamic Neon Mini pointing shape respective to the active domain */}
-              <motion.div
-                animate={{ y: [0, -4, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="flex items-center justify-center"
-              >
-                <Artifact type={activeDomain} size="mini" />
-              </motion.div>
-
-              <div className="p-3 rounded-lg border border-neutral-900/60 bg-black/85 backdrop-blur-md shadow-2xl">
+              <div className="p-1.5 rounded-xl border border-neutral-900/40 bg-black/60 backdrop-blur-md shadow-2xl">
                 <RegistrationForm type={activeDomain} />
               </div>
             </motion.div>

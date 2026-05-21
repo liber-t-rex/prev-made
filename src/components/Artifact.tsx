@@ -15,10 +15,10 @@ export const Artifact: React.FC<ArtifactProps> = ({
 }) => {
   const isLarge = size === 'large';
   const widthClass = size === 'large' 
-    ? 'w-full h-full max-w-[320px] max-h-[320px] md:max-w-[420px] md:max-h-[420px] main-artifact-container' 
+    ? 'w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] md:w-[480px] md:h-[480px] lg:w-[540px] lg:h-[540px] main-artifact-container' 
     : size === 'mini' 
     ? 'w-10 h-10' 
-    : 'w-8 h-8 md:w-20 md:h-20';
+    : 'w-8 h-8 md:w-14 md:h-14';
 
   // Specific glow settings based on domain type
   const colorMap = {
