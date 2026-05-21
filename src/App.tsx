@@ -24,7 +24,7 @@ const DOMAINS: Record<Domain, DomainConfig> = {
     domainName: 'MADE.FR',
     name: 'La Tortue',
     glowColor: 'rgba(34, 211, 238, 0.4)',
-    glowIntensity: 'rgba(6, 182, 212, 0.22)',
+    glowIntensity: 'rgba(6, 182, 212, 0.25)',
     accentColor: 'text-cyan-400',
   },
   eu: {
@@ -32,7 +32,7 @@ const DOMAINS: Record<Domain, DomainConfig> = {
     domainName: 'MADE.EU',
     name: 'La Pile',
     glowColor: 'rgba(192, 132, 252, 0.4)',
-    glowIntensity: 'rgba(168, 85, 247, 0.18)',
+    glowIntensity: 'rgba(168, 85, 247, 0.22)',
     accentColor: 'text-purple-400',
   },
 };

@@ -59,7 +59,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ type = 'eu' 
   return (
     <div className={`w-[240px] sm:w-[260px] font-mono text-[10px] ${activeTheme.text} flex flex-col`}>
       {/* Interactive Frame Box Container */}
-      <div className={`relative w-full h-[150px] border ${activeTheme.border} ${activeTheme.glow} bg-black/50 backdrop-blur-md rounded-lg overflow-hidden transition-all duration-500 flex items-center justify-center`}>
+      <div className={`relative w-full h-[185px] border ${activeTheme.border} ${activeTheme.glow} bg-black/50 backdrop-blur-md rounded-lg overflow-hidden transition-all duration-500 flex items-center justify-center`}>
         <AnimatePresence mode="wait">
           {!iframeLoaded && (
             <motion.div
