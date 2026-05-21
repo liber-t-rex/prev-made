@@ -261,7 +261,7 @@ export const Artifact: React.FC<ArtifactProps> = ({
           filter: `drop-shadow(0 0 6px ${glow}) drop-shadow(0 0 15px ${glow})`,
         }}
       >
-        {/* Outer perfect Hexagon */}
+        {/* Concentric Hexagon 1: Outer Hexagon */}
         <motion.polygon
           points="100,15 180,60 180,140 100,185 20,140 20,60"
           fill="none"
@@ -274,116 +274,206 @@ export const Artifact: React.FC<ArtifactProps> = ({
           animate="visible"
         />
 
-        {/* Tortoise Shell Plating (wavy-organic-geometric division) */}
-        {/* Center plate (hexagonal-like organic form) */}
-        <motion.path
-          d="M 100,65 Q 128,70 135,100 Q 128,130 100,135 Q 72,130 65,100 Q 72,70 100,65 Z"
+        {/* Concentric Hexagon 2: Mid Hexagon */}
+        <motion.polygon
+          points="100,45 156,77 156,123 100,155 44,123 44,77"
+          fill="none"
+          stroke={neon}
+          strokeWidth={isLarge ? "2" : "3"}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          variants={animate ? lineVariants : undefined}
+          initial="hidden"
+          animate="visible"
+        />
+
+        {/* Concentric Hexagon 3: Inner Hexagon */}
+        <motion.polygon
+          points="100,75 126,90 126,110 100,125 74,110 74,90"
           fill="none"
           stroke={secondary}
-          strokeWidth={isLarge ? "3" : "4.5"}
+          strokeWidth={isLarge ? "1.5" : "2"}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          variants={animate ? lineVariants : undefined}
+          initial="hidden"
+          animate="visible"
+        />
+
+        {/* Concentric Hexagon 4: Core Hexagon */}
+        <motion.polygon
+          points="100,88 111,94 111,106 100,112 89,106 89,94"
+          fill="none"
+          stroke={neon}
+          strokeWidth={isLarge ? "1" : "1.5"}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          variants={animate ? lineVariants : undefined}
+          initial="hidden"
+          animate="visible"
+        />
+
+        {/* Core Radiating Axes */}
+        {/* Vertical Center Axis */}
+        <motion.line
+          x1="100"
+          y1="15"
+          x2="100"
+          y2="185"
+          stroke={neon}
+          strokeWidth={isLarge ? "2.5" : "3"}
+          strokeLinecap="round"
+          variants={animate ? lineVariants : undefined}
+          initial="hidden"
+          animate="visible"
+        />
+        {/* Diagonal Axis (Top-Left to Bottom-Right) */}
+        <motion.line
+          x1="20"
+          y1="60"
+          x2="180"
+          y2="140"
+          stroke={neon}
+          strokeWidth={isLarge ? "1.5" : "2"}
+          strokeLinecap="round"
+          variants={animate ? lineVariants : undefined}
+          initial="hidden"
+          animate="visible"
+        />
+        {/* Diagonal Axis (Bottom-Left to Top-Right) */}
+        <motion.line
+          x1="20"
+          y1="140"
+          x2="180"
+          y2="60"
+          stroke={neon}
+          strokeWidth={isLarge ? "1.5" : "2"}
           strokeLinecap="round"
           variants={animate ? lineVariants : undefined}
           initial="hidden"
           animate="visible"
         />
 
-        {/* Shell segment division beams branching outward from the center plate to vertices */}
-        {/* Top center branch */}
-        <motion.path
-          d="M 100,65 Q 100,35 100,15"
-          fill="none"
-          stroke={neon}
-          strokeWidth={isLarge ? "2" : "3"}
+        {/* Left inner vertical sub-strut */}
+        <motion.line
+          x1="44"
+          y1="77"
+          x2="44"
+          y2="123"
+          stroke={secondary}
+          strokeWidth={isLarge ? "1" : "1.5"}
           strokeLinecap="round"
           variants={animate ? lineVariants : undefined}
           initial="hidden"
           animate="visible"
         />
-        {/* Top-Right branch */}
-        <motion.path
-          d="M 135,100 T 180,60"
-          fill="none"
-          stroke={neon}
-          strokeWidth={isLarge ? "2" : "3"}
-          strokeLinecap="round"
-          variants={animate ? lineVariants : undefined}
-          initial="hidden"
-          animate="visible"
-        />
-        {/* Bottom-Right branch */}
-        <motion.path
-          d="M 135,100 T 180,140"
-          fill="none"
-          stroke={neon}
-          strokeWidth={isLarge ? "2" : "3"}
-          strokeLinecap="round"
-          variants={animate ? lineVariants : undefined}
-          initial="hidden"
-          animate="visible"
-        />
-        {/* Bottom center branch */}
-        <motion.path
-          d="M 100,135 Q 100,165 100,185"
-          fill="none"
-          stroke={neon}
-          strokeWidth={isLarge ? "2" : "3"}
-          strokeLinecap="round"
-          variants={animate ? lineVariants : undefined}
-          initial="hidden"
-          animate="visible"
-        />
-        {/* Bottom-Left branch */}
-        <motion.path
-          d="M 65,100 T 20,140"
-          fill="none"
-          stroke={neon}
-          strokeWidth={isLarge ? "2" : "3"}
-          strokeLinecap="round"
-          variants={animate ? lineVariants : undefined}
-          initial="hidden"
-          animate="visible"
-        />
-        {/* Top-Left branch */}
-        <motion.path
-          d="M 65,100 T 20,60"
-          fill="none"
-          stroke={neon}
-          strokeWidth={isLarge ? "2" : "3"}
+        {/* Right inner vertical sub-strut */}
+        <motion.line
+          x1="156"
+          y1="77"
+          x2="156"
+          y2="123"
+          stroke={secondary}
+          strokeWidth={isLarge ? "1" : "1.5"}
           strokeLinecap="round"
           variants={animate ? lineVariants : undefined}
           initial="hidden"
           animate="visible"
         />
 
-        {/* Organic wavy concentric accents mimicking the tortoise sketch textures inside segments */}
+        {/* Upper nested chevrons / parallel elements mimicking the screenshot's fine spiderweb layout */}
+        <motion.line
+          x1="100"
+          y1="30"
+          x2="168"
+          y2="68"
+          stroke={secondary}
+          strokeWidth="1"
+          opacity="0.8"
+          variants={animate ? lineVariants : undefined}
+          initial="hidden"
+          animate="visible"
+        />
+        <motion.line
+          x1="100"
+          y1="30"
+          x2="32"
+          y2="68"
+          stroke={secondary}
+          strokeWidth="1"
+          opacity="0.8"
+          variants={animate ? lineVariants : undefined}
+          initial="hidden"
+          animate="visible"
+        />
+
+        {/* Lower nested chevrons */}
+        <motion.line
+          x1="100"
+          y1="170"
+          x2="168"
+          y2="132"
+          stroke={secondary}
+          strokeWidth="1"
+          opacity="0.8"
+          variants={animate ? lineVariants : undefined}
+          initial="hidden"
+          animate="visible"
+        />
+        <motion.line
+          x1="100"
+          y1="170"
+          x2="32"
+          y2="132"
+          stroke={secondary}
+          strokeWidth="1"
+          opacity="0.8"
+          variants={animate ? lineVariants : undefined}
+          initial="hidden"
+          animate="visible"
+        />
+
+        {/* Left side Chevron "<" */}
+        <motion.path
+          d="M 50,85 L 30,100 L 50,115"
+          fill="none"
+          stroke={secondary}
+          strokeWidth={isLarge ? "1.5" : "2"}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          variants={animate ? lineVariants : undefined}
+          initial="hidden"
+          animate="visible"
+        />
+
+        {/* Right side Chevron ">" */}
+        <motion.path
+          d="M 150,85 L 170,100 L 150,115"
+          fill="none"
+          stroke={secondary}
+          strokeWidth={isLarge ? "1.5" : "2"}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          variants={animate ? lineVariants : undefined}
+          initial="hidden"
+          animate="visible"
+        />
+
+        {/* Extra fine aesthetic concentric rings/crossings if Large rendering */}
         {isLarge && (
           <>
-            {/* Top-left plate curves */}
-            <motion.path d="M 40,55 Q 60,40 85,50" fill="none" stroke={secondary} strokeWidth="1.5" opacity="0.6" />
-            
-            {/* Top-right plate curves */}
-            <motion.path d="M 115,50 Q 140,40 160,55" fill="none" stroke={secondary} strokeWidth="1.5" opacity="0.6" />
-            
-            {/* Right side plate curves */}
-            <motion.path d="M 148,85 Q 165,100 148,115" fill="none" stroke={secondary} strokeWidth="1.5" opacity="0.6" />
-            
-            {/* Bottom-right plate curves */}
-            <motion.path d="M 115,150 Q 140,160 160,145" fill="none" stroke={secondary} strokeWidth="1.5" opacity="0.6" />
-            
-            {/* Bottom-left plate curves */}
-            <motion.path d="M 40,145 Q 60,160 85,150" fill="none" stroke={secondary} strokeWidth="1.5" opacity="0.6" />
-            
-            {/* Left side plate curves */}
-            <motion.path d="M 52,85 Q 35,100 52,115" fill="none" stroke={secondary} strokeWidth="1.5" opacity="0.6" />
-            
-            {/* Central concentric miniature cell */}
-            <motion.path
-              d="M 100,85 Q 115,88 118,100 Q 115,112 100,115 Q 85,112 82,100 Q 85,88 100,85"
+            <motion.polygon
+              points="100,55 139,77 139,123 100,145 61,123 61,77"
               fill="none"
               stroke={secondary}
-              strokeWidth="1.2"
+              strokeWidth="0.75"
               opacity="0.5"
             />
+            {/* Fine concentric web diagonals */}
+            <motion.line x1="44" y1="77" x2="100" y2="45" stroke={secondary} strokeWidth="1" opacity="0.6" />
+            <motion.line x1="156" y1="77" x2="100" y2="45" stroke={secondary} strokeWidth="1" opacity="0.6" />
+            <motion.line x1="44" y1="123" x2="100" y2="155" stroke={secondary} strokeWidth="1" opacity="0.6" />
+            <motion.line x1="156" y1="123" x2="100" y2="155" stroke={secondary} strokeWidth="1" opacity="0.6" />
           </>
         )}
       </svg>
