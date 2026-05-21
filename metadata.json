@@ -1,0 +1,6 @@
+{
+  "name": "Made Art",
+  "description": "Un projet minimaliste et sombre présentant les domaines made.paris, made.fr et made.eu avec leurs artefacts néon respectifs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

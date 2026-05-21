@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@200;300;400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Custom styles for pitch black presentation */
+body {
+  background-color: #000000;
+  color: #ffffff;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Optimized styling for mobile landscape and short height devices */
+@media (max-height: 520px) {
+  /* Scale down the outer container margins and paddings */
+  #root-container {
+    padding: clamp(6px, 2.5vh, 16px) !important;
+  }
+  
+  /* Make Header smaller */
+  header {
+    margin-bottom: 2px !important;
+  }
+
+  /* Make centered artifact extremely compact */
+  .main-artifact-container {
+    height: 18vh !important;
+    width: 18vh !important;
+    max-height: 90px !important;
+    max-width: 90px !important;
+  }
+  
+  .main-artifact-container svg {
+    max-height: 90px !important;
+    max-width: 90px !important;
+  }
+
+  /* Scale down registration form for extreme short screens to avoid overlaps */
+  .registration-container {
+    transform: scale(0.7) translateY(12px) !important;
+    transform-origin: bottom center;
+  }
+  
+  /* Compact layout for inactive buttons with tighter margins */
+  .nav-btn-container {
+    padding: 3px !important;
+  }
+  
+  .nav-btn-container svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+}
+
+
